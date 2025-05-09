@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+
+        <!--=====================================-->
+        <!--=       Breadcrumb Area Start      =-->
+        <!--=====================================-->
+
+        <div class="edu-breadcrumb-area breadcrumb-style-2 bg-image bg-image--19">
+            <div class="container">
+                <div class="breadcrumb-inner">
+                    <div class="page-title">
+                        <h1 class="title">leadership Instruction</h1>
+                    </div>
+                    <ul class="edu-breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="separator"><i class="icon-angle-right"></i></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="separator"><i class="icon-angle-right"></i></li>
+                        <li class="breadcrumb-item active" aria-current="page">Instructors 3</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--=====================================-->
+        <!--=        Team Area Start       	=-->
+        <!--=====================================-->
+        <!-- Start Team Area  -->
+        <div class="edu-team-area team-area-3 edu-section-gap">
+            <div class="container">
+                <div class="section-title section-center" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                    <span class="pre-title">Instructors</span>
+                    <h2 class="title">Course Instructors</h2>
+                    <span class="shape-line"><i class="icon-19"></i></span>
+                </div>
+                <div class="row g-5">
+                    <!-- Start Instructor Grid  -->
+                    {% for instructor in instructors %}
+                    <div class="col-lg-4 col-md-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                        <div class="edu-team-grid team-style-3">
+                            <div class="inner">
+                                <div class="thumbnail-wrap">
+                                    <div class="thumbnail">
+                                        <a href="javascript:void(0);">
+                                            <img src="{{ instructor.image.url }}" alt="{{ instructor.name }}">
+                                        </a>
+                                    </div>
+                                    <ul class="team-share-info">
+                                        {% if instructor.facebook %}
+                                            <li><a href="{{ instructor.facebook }}"><i class="icon-facebook"></i></a></li>
+                                        {% endif %}
+                                        {% if instructor.twitter %}
+                                            <li><a href="{{ instructor.twitter }}"><i class="icon-twitter"></i></a></li>
+                                        {% endif %}
+                                        {% if instructor.linkedin %}
+                                            <li><a href="{{ instructor.linkedin }}"><i class="icon-linkedin2"></i></a></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                <div class="content">
+                                    <h5 class="title"><a href="javascript:void(0);">{{ instructor.name }}</a></h5>
+                                    <span class="designation">{{ instructor.designation }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}                                       
+                    <!-- End Instructor Grid  -->
+
+                </div>
+            </div>
+        </div>
+        <!-- End Team Area  -->
+      
+{% endblock %}

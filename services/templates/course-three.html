@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+
+
+        <!--=====================================-->
+        <!--=       Breadcrumb Area Start      =-->
+        <!--=====================================-->
+        <div class="edu-breadcrumb-area">
+            <div class="container">
+                <div class="breadcrumb-inner">
+                    <div class="page-title">
+                        <h1 class="title">Course Style 3</h1>
+                    </div>
+                    <ul class="edu-breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="separator"><i class="icon-angle-right"></i></li>
+                        <li class="breadcrumb-item"><a href="#">Courses</a></li>
+                        <li class="separator"><i class="icon-angle-right"></i></li>
+                        <li class="breadcrumb-item active" aria-current="page">Course Style 3</li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="shape-group">
+                <li class="shape-1">
+                    <span></span>
+                </li>
+                <li class="shape-2 scene"><img data-depth="2" src="{% static 'assets/images/about/shape-13.png' %}" alt="shape"></li>
+                <li class="shape-3 scene"><img data-depth="-2" src="{% static 'assets/images/about/shape-15.png' %}" alt="shape"></li>
+                <li class="shape-4">
+                    <span></span>
+                </li>
+                <li class="shape-5 scene"><img data-depth="2" src="{% static 'assets/images/about/shape-07.png' %}" alt="shape"></li>
+            </ul>
+        </div>
+
+        <!--=====================================-->
+        <!--=        Courses Area Start         =-->
+        <!--=====================================-->
+        <div class="edu-course-area course-area-1 gap-tb-text"> 
+            <div class="container">
+                <div class="edu-sorting-area">
+                    <div class="sorting-left">
+                        <h6 class="showing-text">We found <span>{{ course_count }}</span> courses available for you</h6>
+                    </div>
+                    <div class="sorting-right">
+                        <div class="layout-switcher">
+                            <label>Grid</label>
+                            <ul class="switcher-btn">
+                                <li><a href="course-one.html" class="active"><i class="icon-53"></i></a></li>
+                                <li><a href="course-four.html" class=""><i class="icon-54"></i></a></li>
+                            </ul>
+                        </div>
+                        <form method="get" id="filterForm">
+                            <div class="edu-sorting">
+                                <div class="icon"><i class="icon-55"></i></div>
+                                <select class="edu-select" name="sort_by" onchange="document.getElementById('filterForm').submit();">
+                                    <option value="">Filters</option>
+                                    <option value="low_to_high">Low To High</option>
+                                    <option value="high_to_low">High To Low</option>
+                                    <option value="last_viewed">Last Viewed</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% load service_filters %}
+
+                <div class="row g-5" id="courseContainer">
+                    
+                    {% for course in courses %}
+                    <div class="col-12 col-xl-4 col-lg-6 col-md-6" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                        <div class="edu-course course-style-5 inline" data-tipped-options="inline: 'tooltip-{{ course.id }}'">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    <a href="{% url 'course-detail' course.id %}">
+                                        <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="course-price price-round">${{ course.price }}</div>
+                                    <span class="course-level">{{ course.level }}</span>
+                                    <h5 class="title">
+                                        <a href="{% url 'course-detail' course.id %}">{{ course.title }}</a>
+                                    </h5>
+                                    <div class="course-rating">
+                                        <div class="rating">
+                                            {{ course.average_rating|star_rating }}
+                                        </div>
+                                        <span class="rating-count">({{ course.rating_count }})</span>
+                                    </div>
+                                    <p>{{ course.description|truncatechars:100 }}</p>
+                                    <ul class="course-meta">
+                                        <li><i class="icon-24"></i>{{ course.lessons }} Lessons</li>
+                                        <li><i class="icon-25"></i>{{ course.students }} Students</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div id="tooltip-{{ course.id }}" class="course-tooltip" style="display:none">
+                            <div class="course-layout-five-tooltip-content">
+                                <div class="content">
+                                    <span class="course-level">{{ course.level }}</span>
+                                    <h5 class="title">
+                                        <a href="{% url 'course-detail' course.id %}">{{ course.title }}</a>
+                                    </h5>
+                                    <div class="course-rating">
+                                        <div class="rating">
+                                            {{ course.average_rating|star_rating }}
+                                        </div>
+                                        <span class="rating-count">({{ course.rating_count }})</span>
+                                    </div>
+                                    <ul class="course-meta">
+                                        <li>{{ course.lessons }} Lessons</li>
+                                        <li>{{ course.duration }}</li>
+                                        <li>{{ course.level }}</li>
+                                    </ul>
+                                    <div class="course-feature">
+                                        <h6 class="title">What You’ll Learn?</h6>
+
+                                        <ul>
+                                            {% for item in course.details.splitlines %}
+                                                {% if item|trim %}
+                                                    <li>{{ item|trim }}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="button-group">
+                                        <a href="#" class="edu-btn btn-medium">Add to Cart</a>
+                                        <a href="#" class="wishlist-btn btn-outline-dark"><i class="icon-22"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>               
+               
+                
+                {% if page_obj.has_next %}
+                <div class="load-more-btn" id="load-more-btn" data-page="{{ page_obj.next_page_number }}">
+                    <a href="javascript:void(0);" class="edu-btn" id="load-more-link">Load More <i class="icon-56"></i></a>
+                </div>
+            {% endif %}
+                
+            </div>
+        </div>
+                    
+        <!-- End Course Area -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const loadMoreButton = document.getElementById('load-more-link');
+                
+                loadMoreButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const pageNumber = loadMoreButton.parentElement.getAttribute('data-page');
+                    
+                    fetch(`/courses/?page=${pageNumber}`, {
+                        method: 'GET',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const courseContainer = document.getElementById('courseContainer');
+                        courseContainer.insertAdjacentHTML('beforeend', data.courses_html);
+                        
+                        if (data.has_next) {
+                            loadMoreButton.parentElement.setAttribute('data-page', data.next_page);
+                        } else {
+                            loadMoreButton.parentElement.style.display = 'none'; 
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error loading more courses:', error);
+                    });
+                });
+            });
+        </script>
+        
+
+{% endblock %}

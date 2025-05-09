@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+
+        <!--=====================================-->
+        <!--=       Breadcrumb Area Start      =-->
+        <!--=====================================-->
+        <div class="edu-breadcrumb-area">
+            <div class="container">
+                <div class="breadcrumb-inner">
+                    <div class="page-title">
+                        <h1 class="title">Event Page</h1>
+                    </div>
+                    <ul class="edu-breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="separator"><i class="icon-angle-right"></i></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="separator"><i class="icon-angle-right"></i></li>
+                        <li class="breadcrumb-item active" aria-current="page">Event 1</li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="shape-group">
+                <li class="shape-1">
+                    <span></span>
+                </li>
+                <li class="shape-2 scene"><img data-depth="2" src="{% static 'assets/images/about/shape-13.png' %}" alt="shape"></li>
+                <li class="shape-3 scene"><img data-depth="-2" src="{% static 'assets/images/about/shape-15.png' %}" alt="shape"></li>
+                <li class="shape-4">
+                    <span></span>
+                </li>
+                <li class="shape-5 scene"><img data-depth="2" src="{% static 'assets/images/about/shape-07.png' %}" alt="shape"></li>
+            </ul>
+        </div>
+        <!--=====================================-->
+        <!--=        Event Area Start         =-->
+        <!--=====================================-->
+        <div class="edu-event-area event-area-1 section-gap-equal">
+            <div class="container">
+                <div class="row g-5">
+                    <!-- Start Event Grid  -->
+                    {% for event in page_obj %}
+                    <div class="col-lg-4 col-md-6" data-sal-delay="100" data-sal="slide-up" data-sal-duration="800">
+                        <div class="edu-event event-style-1">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    <a href="{{ event.get_absolute_url }}">
+                                        <img src="{{ event.image.url }}" alt="Event Image">
+                                    </a>
+                                    <div class="event-time">
+                                        <span><i class="icon-33"></i>{{ event.start_time|time:"H:iA" }} - {{ event.end_time|time:"H:iA" }}</span>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="event-date">
+                                        <span class="day">{{ event.date|date:"d" }}</span>
+                                        <span class="month">{{ event.date|date:"b"|upper }}</span>
+                                    </div>
+                                    <h5 class="title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h5>
+                                    <p>{{ event.description|truncatewords:15 }}</p>
+                                    <ul class="event-meta">
+                                        <li><i class="icon-40"></i>{{ event.location }}</li>
+                                    </ul>
+                                    <div class="read-more-btn">
+                                        <a class="edu-btn btn-small btn-secondary" href="{{ event.get_absolute_url }}">Learn More <i class="icon-4"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="edu-pagination">
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><i class="icon-west"></i></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#" aria-label="Previous"><i class="icon-west"></i></a></li>
+                    {% endif %}
+                
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="active"><a href="#">{{ num }}</a></li>
+                        {% else %}
+                            <li><a href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                
+                    {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}" aria-label="Next"><i class="icon-east"></i></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#" aria-label="Next"><i class="icon-east"></i></a></li>
+                    {% endif %}
+                </div>
+                
+
+            </div>
+        </div>
+        
+
+{% endblock %}
+

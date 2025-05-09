@@ -1,0 +1,82 @@
+/* #baccol {
+    background: linear-gradient(to right, #a8e063, #56ab2f);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: -20px ;
+
+    
+}
+#pills-tab .nav-link {
+    background-color: #e0e0e0 !important; 
+    color: #333 !important; 
+    margin: 0 5px;
+}
+
+#pills-tab .nav-link.active {
+    background-color: #3EB75E !important; 
+    color: #fff !important;
+}
+
+#pills-tab .nav-link:hover {
+    background-color: #d5d5d5 !important;
+    color: #000 !important;
+}
+
+.register-tab {
+    background-color: #acfc97; 
+    color: white;
+}
+
+.form-control {
+    border: 1px solid #ced4da; 
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: none; 
+}
+
+.form-control:focus {
+    border-color: #86b7fe; 
+    outline: 0; 
+}
+.btn-login {
+    background: linear-gradient(to right, #1ab69d, #3EB75E);
+    border: none;
+    border-radius: 0.5rem;
+    min-height: 45px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.5rem; 
+}
+.btn-login:hover {
+    background: linear-gradient(to right, #1ab69d, #3EB75E);
+}
+.forgot-password {
+    color: #000000;
+    font-weight: 500;
+    text-decoration: none;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.edu-breadcrumb-area {
+    margin-bottom: 20px !important; 
+}
+
+.container.d-flex {
+    margin-top: -20px !important;  
+}
+
+
+.edu-breadcrumb .title {
+    font-size: 1.75rem !important;  
+} */
